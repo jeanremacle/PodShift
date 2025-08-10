@@ -944,8 +944,36 @@ verify_installation() {
         fi
     done
     
-    # Check Python in virtual environment
-    if [[ -d "$PROJECT_ROOT/venv" ]]; then
+    # Check Python environment based on setup mode
+    if [[ "$PYTHON_MANAGER" == "pyenv" && "$DEPENDENCY_TOOL" == "uv" ]]; then
+        # pyenv + uv mode: Check for .venv and use uv run
+        if [[ -d "$PROJECT_ROOT/.venv" ]]; then
+            log_success "Found uv virtual environment at .venv"
+            
+            if uv run python --version >/dev/null 2>&1; then
+                local py_version=$(uv run python --version)
+                log_success "Python (uv): $py_version"
+                
+                # Check Python packages using uv run
+                local packages=("docker" "yaml")
+                for package in "${packages[@]}"; do
+                    if uv run python -c "import $package" 2>/dev/null; then
+                        log_success "Python package '$package' is available"
+                    else
+                        log_error "Python package '$package' not found"
+                        ((errors++))
+                    fi
+                done
+            else
+                log_error "Python not working with uv"
+                ((errors++))
+            fi
+        else
+            log_error "uv virtual environment (.venv) not found"
+            ((errors++))
+        fi
+    elif [[ -d "$PROJECT_ROOT/venv" ]]; then
+        # Traditional venv mode: Use standard activation
         source "$PROJECT_ROOT/venv/bin/activate"
         
         if python --version >/dev/null 2>&1; then
@@ -968,8 +996,28 @@ verify_installation() {
         fi
         
         deactivate
+    elif [[ "$PYTHON_MANAGER" == "pyenv" ]]; then
+        # pyenv without uv: Use pyenv python directly
+        if command -v pyenv >/dev/null 2>&1 && pyenv version-name >/dev/null 2>&1; then
+            local py_version=$(python --version 2>&1)
+            log_success "Python (pyenv): $py_version"
+            
+            # Check Python packages
+            local packages=("docker" "yaml")
+            for package in "${packages[@]}"; do
+                if python -c "import $package" 2>/dev/null; then
+                    log_success "Python package '$package' is available"
+                else
+                    log_error "Python package '$package' not found"
+                    ((errors++))
+                fi
+            done
+        else
+            log_error "pyenv Python environment not working"
+            ((errors++))
+        fi
     else
-        log_error "Virtual environment not found"
+        log_error "No Python environment found (expected venv, .venv, or pyenv setup)"
         ((errors++))
     fi
     
