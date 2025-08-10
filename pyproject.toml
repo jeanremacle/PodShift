@@ -31,7 +31,7 @@ classifiers = [
     "Topic :: System :: Systems Administration",
     "Topic :: Utilities"
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.8.1"
 dependencies = [
     "docker>=6.1.0,<8.0.0",
     "PyYAML>=6.0,<7.0"

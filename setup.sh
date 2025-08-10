@@ -27,7 +27,7 @@ AUTO_DETECT=true
 
 # Minimum requirements
 MIN_MACOS_VERSION="12.0"
-MIN_PYTHON_VERSION="3.8"
+MIN_PYTHON_VERSION="3.11"
 REQUIRED_PYTHON_VERSION="3.11"
 
 # Color codes for output
