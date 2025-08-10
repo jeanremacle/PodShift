@@ -443,8 +443,14 @@ EOF
 install_python_via_pyenv() {
     log_info "Installing Python $REQUIRED_PYTHON_VERSION via pyenv..."
     
-    # Check if the required version is already installed
-    if pyenv versions --bare | grep -q "^${REQUIRED_PYTHON_VERSION}"; then
+    # Check if pyenv is working properly
+    if ! pyenv versions >/dev/null 2>&1; then
+        log_error "pyenv command failed. Ensure pyenv is properly installed and initialized."
+        return 1
+    fi
+    
+    # Check if the required version is already installed (fixed regex)
+    if pyenv versions --bare | grep -q "^${REQUIRED_PYTHON_VERSION}\\(\\.\\|$\\)"; then
         log_success "Python $REQUIRED_PYTHON_VERSION is already installed via pyenv"
     else
         log_info "Installing Python $REQUIRED_PYTHON_VERSION..."
@@ -458,11 +464,26 @@ install_python_via_pyenv() {
     
     # Set local Python version for the project
     log_info "Setting project Python version to $REQUIRED_PYTHON_VERSION..."
-    pyenv local "$REQUIRED_PYTHON_VERSION"
+    if ! pyenv local "$REQUIRED_PYTHON_VERSION"; then
+        log_error "Failed to set local Python version to $REQUIRED_PYTHON_VERSION"
+        return 1
+    fi
     
-    # Verify installation
-    local python_version=$(pyenv version | cut -d' ' -f1)
-    log_success "Active Python version: $python_version"
+    # Verify installation (improved verification)
+    if pyenv version-name >/dev/null 2>&1; then
+        local python_version=$(pyenv version-name)
+        log_success "Active Python version: $python_version"
+        
+        # Verify it matches our requirement
+        if [[ "$python_version" =~ ^${REQUIRED_PYTHON_VERSION}(\.|$) ]]; then
+            log_success "Python version verification passed"
+        else
+            log_warn "Active version ($python_version) doesn't match required version ($REQUIRED_PYTHON_VERSION)"
+        fi
+    else
+        log_error "Failed to verify Python installation"
+        return 1
+    fi
 }
 
 # Install and setup uv
