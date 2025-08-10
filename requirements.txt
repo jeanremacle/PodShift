@@ -1,0 +1,17 @@
+# PodShift - Python Dependencies
+# Core dependencies for Docker analysis and migration to Podman
+
+# Docker SDK for Python - for Docker API interactions
+docker>=6.1.0,<8.0.0
+
+# YAML parser for Docker Compose file analysis
+PyYAML>=6.0,<7.0
+
+# Development and testing dependencies (optional)
+# Uncomment if you need these for development
+
+# pytest>=7.0.0,<8.0.0          # Testing framework
+# pytest-cov>=4.0.0,<5.0.0     # Coverage reporting
+# black>=23.0.0,<24.0.0         # Code formatting
+# flake8>=6.0.0,<7.0.0          # Linting
+# mypy>=1.0.0,<2.0.0            # Type checking

@@ -1,0 +1,308 @@
+# PodShift - Git Ignore File
+# Ignore patterns for Docker to Podman migration project
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+.ENV/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django/Flask (if applicable)
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Scrapy (if applicable)
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.metadata
+.classpath
+.settings/
+*.sublime-*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Project-specific files
+# Generated discovery and analysis files
+docker_inventory_*.json
+docker_containers_*.json
+docker_images_*.json
+docker_volumes_*.json
+docker_networks_*.json
+docker_compose_files_*.json
+docker_discovery_report_*.json
+docker_discovery_summary_*.txt
+container_dependencies_*.json
+system_resources_*.json
+
+# Generated text files
+docker_containers_detailed_*.txt
+docker_volumes_detailed_*.txt
+docker_networks_detailed_*.txt
+docker_networks_*_inspect.json
+
+# Log files (keep directory structure but ignore log contents)
+logs/*.log
+logs/discovery_*.log
+logs/system_resources_*.log
+logs/setup_*.log
+
+# Backup directories (keep structure but ignore backup contents)
+backups/docker_config_*/
+backups/*.tar
+backups/*.zip
+
+# Temporary files
+*.tmp
+*.temp
+.temp/
+temp/
+
+# Output and report files
+reports/
+output/
+*.report
+*.analysis
+
+# Docker-related temporary files
+.dockerignore.bak
+docker-compose.override.yml
+docker-compose.*.yml.bak
+
+# Podman-related files (migration targets)
+podman_config_*/
+*.podman
+
+# System and runtime files
+*.pid
+*.lock
+.cache/
+
+# Node.js (if any frontend components are added)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archive files
+*.tar.gz
+*.tar.bz2
+*.zip
+*.rar
+*.7z
+
+# Binary files
+*.bin
+*.exe
+*.dmg
+*.pkg
+
+# Development tools
+.pre-commit-config.yaml.bak
+.commitlintrc.js.bak
+
+# Keep directory structure but ignore contents in some cases
+# (This allows empty directories to be tracked)
+logs/.gitkeep
+!logs/.gitkeep
+backups/.gitkeep
+!backups/.gitkeep
+configs/m1-optimized/.gitkeep
+!configs/m1-optimized/.gitkeep
+configs/templates/.gitkeep
+!configs/templates/.gitkeep
+configs/validation/.gitkeep
+!configs/validation/.gitkeep
+docs/api/.gitkeep
+!docs/api/.gitkeep
+docs/installation/.gitkeep
+!docs/installation/.gitkeep
+docs/migration-guide/.gitkeep
+!docs/migration-guide/.gitkeep
+docs/troubleshooting/.gitkeep
+!docs/troubleshooting/.gitkeep
+rollback/.gitkeep
+!rollback/.gitkeep
+scripts/cleanup/.gitkeep
+!scripts/cleanup/.gitkeep
+scripts/discovery/.gitkeep
+!scripts/discovery/.gitkeep
+scripts/migration/.gitkeep
+!scripts/migration/.gitkeep
+scripts/podman-setup/.gitkeep
+!scripts/podman-setup/.gitkeep
+scripts/utils/.gitkeep
+!scripts/utils/.gitkeep
+tests/fixtures/.gitkeep
+!tests/fixtures/.gitkeep
+tests/integration/.gitkeep
+!tests/integration/.gitkeep
+tests/unit/.gitkeep
+!tests/unit/.gitkeep
+tools/installers/.gitkeep
+!tools/installers/.gitkeep
+tools/validators/.gitkeep
+!tools/validators/.gitkeep
+web-gui/backend/.gitkeep
+!web-gui/backend/.gitkeep
+web-gui/frontend/.gitkeep
+!web-gui/frontend/.gitkeep
+web-gui/static/.gitkeep
+!web-gui/static/.gitkeep
